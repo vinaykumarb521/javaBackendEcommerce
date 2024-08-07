@@ -1,0 +1,28 @@
+package com.ecommerce.model;
+import java.time.LocalDate;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import lombok.Data;
+
+@Data
+@Entity
+public class Bill {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private LocalDate date;
+    private double amount;
+    private String buyerName;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bill_id")
+    private List<BillItem> items;
+}
